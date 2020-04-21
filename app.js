@@ -15,12 +15,11 @@ var IoTApp  = require('./application/application.js');
   cfenv will use the file defined by vcapFile instead.
   You can export these local json files from IBM Cloud!
 */
-var app_env = cfenv.getAppEnv({vcapFile: 'vcap.json'});
+var app_env = cfenv.getAppEnv();
 const IOT_PLATFORM = "Internet of Things Platform - Test";
 
 /* Retrieve Cloud Foundry environment variables. */
 var credentials = app_env.getServiceCreds(IOT_PLATFORM);
-var credentials = app_env.getServices();
 var application = new IoTApp(credentials.org, credentials.apiKey, credentials.apiToken);
 
 /* Only when running local*/
