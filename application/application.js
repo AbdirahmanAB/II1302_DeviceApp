@@ -37,17 +37,27 @@ class Application extends EventEmitter {
     });
   }
 
-  async pushMessage(deviceType, deviceID){
+  forwardMessage(url, deviceType, deviceID){
+    return this.retrieveMessage(url)
+      .then(data => JSON.stringify(data.display.message.text))
+      .then(data => this.pushMessage(data, deviceType, deviceID))
+      .catch(console.error);
+  }
+
+  async retrieveMessage(url){
+    let myData;
     try {
-      const url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4';
       const response = await axios.get(url);
-      var myData = response.data.display.message.text;
-      myData = JSON.stringify(myData);
-      this.app_client.publishDeviceCommand(deviceType, deviceID, "currentMessage", "json", myData);
+      myData = response.data;
     } catch (error) {
       console.error(error);
     }
+    return myData;
   };
+
+  pushMessage(myData,deviceType, deviceID){
+    this.app_client.publishDeviceCommand(deviceType, deviceID, "currentMessage", "json", myData);
+  }
 }
 
 module.exports = Application;
