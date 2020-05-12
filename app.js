@@ -21,11 +21,11 @@ var app_env = cfenv.getAppEnv();
 const IOT_PLATFORM = "Internet of Things Platform - Test";
 
 /* Retrieve Cloud Foundry environment variables. */
-/*var credentials = app_env.getServiceCreds(IOT_PLATFORM);
-var application = new IoTApp(credentials.org, credentials.apiKey, credentials.apiToken);*/
+var credentials = app_env.getServiceCreds(IOT_PLATFORM);
+var application = new IoTApp(credentials.org, credentials.apiKey, credentials.apiToken);
 
 /* Only when running local*/
-var application = new IoTApp(org, apiKey, apiToken);
+//var application = new IoTApp(org, apiKey, apiToken);
 
 
 /* Listen for a request message event and push new message to device */
@@ -40,12 +40,12 @@ application.on('Device requests message', async function(deviceType, deviceID) {
 
 /* Start server on the specified port and binding host app_env.port */
 //http.listen(app_env.port || 4096, function() {});
-server.listen(3000, () => {
+/*server.listen(3000, () => {
   console.log("Server running on port 3000");
- });
+ });*/
  // // start server on the specified port and binding host
-/*server.listen(app_env.port, '0.0.0.0', function() {
+server.listen(app_env.port, '0.0.0.0', function() {
 
 //  // print a message when the server starts listening
  console.log("server starting on " + app_env.url);
-});*/
+});
