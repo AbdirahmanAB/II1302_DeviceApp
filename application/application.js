@@ -25,7 +25,6 @@ class Application extends EventEmitter {
 
     /* When your application has connected, setup listeners and callbacks. */
     this.app_client.on("connect", function () {
-      console.log("Connected the application.");
       
       /* Subscribe to all getCurrrentMessage event from all devices*/
       that.app_client.subscribeToDeviceEvents("+", "+", "getCurrentMessage");

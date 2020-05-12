@@ -15,22 +15,6 @@ async function apiCall(destination){
     return myData;
   };
 
-  /*async function allDevices(config) {
-    const data = await apiCall(config);
-    //Disect the information
-    let devices = data.map(device => ({
-      deviceId: device.deviceId, created: device.registration.date}));
-      console.log(devices)
-
-    app.get('/devices', (req, res) => {  
-      res.status(200).send({
-        success: 'true',
-        information: 'All devices currently registered',
-        result: devices
-      })
-    });
-  }allDevices(conf.allDevices);*/
-
 async function allDevices(req, res, next) {
   const data = await apiCall(conf.allDevices);
   //Disect the information
@@ -49,24 +33,6 @@ app.get('/devices', allDevices);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/*function updateAddConfig(deviceID, prevConfig){
-  // change deviceId in configuration to the new deviceID 
-  prevConfig.data.deviceId = deviceID;
-  let newConfig = prevConfig;
-  return newConfig;
-}
-function addDevice(config){
-  app.post('/devices', (req,res) => {
-    let deviceID = req.body.deviceID;
-    let axiosConfig = updateAddConfig(deviceID, config);
-    axios.request(axiosConfig);
-    res.status(201).send({
-      success: 'true',
-      information: 'Added device ' + deviceID
-    });
-  });
-}addDevice(conf.addDevice);*/
-
 function updateAddConfig(req, res, next){
   let deviceID = req.body.deviceID;
   let newConfig = {...conf.addDevice};
@@ -83,23 +49,6 @@ function addDevice(req, res, next){
   });
 };
 app.post('/devices', updateAddConfig, addDevice);
-
-/*function updateDeleteConfig(deviceID, prevConfig){
-  prevConfig.url = prevConfig.url + "/" + deviceID;
-  let newConfig = prevConfig;
-  return newConfig;
-}
-function deleteDevice(config){
-  app.delete('/devices/:deviceID', (req,res)=> {
-    let device = req.params.deviceID;
-    let axiosConfig = updateDeleteConfig(device, config);
-    axios.request(axiosConfig);
-    res.status(200).send({
-      success: 'true',
-      information: 'Succesfully deleted device: ' + device
-    });
-  });
-}deleteDevice(conf.deleteDevice);*/
 
 function updateDeleteConfig(req, res, next){
   let device = req.params.deviceID;

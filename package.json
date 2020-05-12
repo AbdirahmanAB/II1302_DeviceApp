@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "node app.js",
-		"test": "jest --forceExit",
+		"test": "jest --forceExit --env=node --verbose",
 		"type": "module"
 	},
 	"dependencies": {
@@ -23,6 +23,7 @@
 	"devDependencies": {
 		"axios-mock-adapter": "^1.18.1",
 		"jest": "^25.4.0",
-		"nock": "^12.0.3"
+		"nock": "^12.0.3",
+		"supertest": "^4.0.2"
 	}
 }
