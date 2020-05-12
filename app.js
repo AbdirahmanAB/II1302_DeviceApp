@@ -7,9 +7,9 @@ var cfenv = require('cfenv');
 var IoTApp  = require('./application/application.js');
 
 /* Variables for running server local */
-/*var org = "cl3hm5";
+var org = "cl3hm5";
 var apiKey = "a-cl3hm5-kuvpyv8zmp";
-var apiToken = "DjhvwofU*M6BtvJXL8";*/
+var apiToken = "DjhvwofU*M6BtvJXL8";
 
 /* 
   Get the app environment from Cloud Foundry,
@@ -39,7 +39,13 @@ application.on('Device requests message', async function(deviceType, deviceID) {
 });
 
 /* Start server on the specified port and binding host app_env.port */
-http.listen(app_env.port || 4096, function() {});
-/*local server.listen(3000, () => {
+//http.listen(app_env.port || 4096, function() {});
+/*server.listen(3000, () => {
   console.log("Server running on port 3000");
  });*/
+ // // start server on the specified port and binding host
+server.listen(app_env.port, '0.0.0.0', function() {
+
+//  // print a message when the server starts listening
+ console.log("server starting on " + app_env.url);
+});

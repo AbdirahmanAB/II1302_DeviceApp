@@ -15,7 +15,7 @@ async function apiCall(destination){
     return myData;
   };
 
-  async function run(config) {
+  async function allDevices(config) {
     const data = await apiCall(config);
     //Disect the information
     let devices = data.map(device => ({
@@ -28,7 +28,7 @@ async function apiCall(destination){
         result: devices
       })
     });
-  }run(conf.allDevices);
+  }allDevices(conf.allDevices);
 
   // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
